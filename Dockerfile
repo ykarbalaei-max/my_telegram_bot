@@ -1,7 +1,15 @@
-Deploy a Docker image
-Image
-The Docker image and tag you want to deploy
-docker.io/koyeb/demo:latest
-Registry
-If your image is private, create or select the registry configuration secret to allow Koyeb to pull your image
-No credential (optional)
+# استفاده از Python سبک و پایدار
+FROM python:3.11-slim
+
+# فولدر کاری داخل کانتینر
+WORKDIR /app
+
+# کپی فایل‌های پروژه
+COPY requirements.txt .
+COPY main.py .
+
+# نصب کتابخانه‌ها
+RUN pip install --no-cache-dir -r requirements.txt
+
+# دستور اجرای ربات
+CMD ["python3", "main.py"]
