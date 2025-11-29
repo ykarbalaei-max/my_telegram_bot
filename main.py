@@ -1,14 +1,14 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
-import openai
+import Gemini
 import os
 
 # =============================
 # 1. توکن‌ها و کلیدها
 # =============================
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-openai.api_key = OPENAI_API_KEY
+Gemini_API_KEY = os.environ.get("Gemini_API_KEY")
+Gemini.api_key = Gemini_API_KEY
 
 # =============================
 # 2. پرامپت رسمی و دوستانه
@@ -51,8 +51,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo_url = photo_file.file_path
         user_text += f"\n[کاربر یک عکس فرستاده است: {photo_url}]"
     
-    # فراخوانی OpenAI
-    response = openai.ChatCompletion.create(
+    # فراخوانی Gemini
+    response = Gemini.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": BASE_PROMPT},
